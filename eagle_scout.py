@@ -11,11 +11,11 @@ def convert_files(_,unknown_folder):
     video = VideoFileClip(unknown_folder + "/" + _)
     video.write_gif(f"{home}/unbound_now/{_}.gif",program="ffmpeg")
 
-def process_images(_,__,known_folder,unknown_folder):
+def process_images(_,__,known_folder,frame_rate):
     home = os.path.expanduser("~")
-    if __.endswith(".gif"):
+    if f"{home}/unbound_now/{__}".endswith(".gif"):
         try:
-            image = Image.open(home + "/unbound_now/" + __)
+            image = Image.open(f"{home}/unbound_now/{__}")
             for ___ in range(image.n_frames):
                 try:
                     image.seek(___)
@@ -27,9 +27,9 @@ def process_images(_,__,known_folder,unknown_folder):
                     unknown_file = face_recognition.face_encodings(unknown_file)[0]
                     result = bool(face_recognition.compare_faces([known_file],unknown_file)[0])
                     if result:
-                        image.save(f"{home}/unbound_now_output/{_} == {__} | frame: {___}.png",format="png")
-                        with open("matches.txt","a") as file:
-                            file.write(f"{_} == {__} | frame: {___}\n")
+                        with open(f"{home}/unbound_now_output/matches.txt","a") as file:
+                            
+                            file.write(f"{_} == {__} | time: " + str(___ / frame_rate) + "\n")
 
                 except IndexError:
                     continue
@@ -37,7 +37,7 @@ def process_images(_,__,known_folder,unknown_folder):
         except:
             print(f"ERROR: {__}")
 
-def eagle(known_folder,unknown_folder):
+def eagle_scout(known_folder,unknown_folder):
     os.system("clear")
 
     # prep work
@@ -49,7 +49,6 @@ def eagle(known_folder,unknown_folder):
         os.makedirs(f"{home}/unbound_now_output")
 
     core_count = multiprocessing.cpu_count()
-    
 
     known_files = os.listdir(known_folder)
     unknown_files = os.listdir(unknown_folder)
@@ -69,7 +68,7 @@ def eagle(known_folder,unknown_folder):
         __.join()
 
     os.system("clear")
-    print("running facial recognition")
+    print("running face recognition")
     unknown_files = os.listdir(f"{home}/unbound_now")
 
     p_list = []
@@ -78,7 +77,8 @@ def eagle(known_folder,unknown_folder):
     for _ in known_files:
         for __ in unknown_files:
             core_tracker += 1
-            p = multiprocessing.Process(target=process_images,args=(_,__,known_folder,unknown_folder))
+            frame_rate = VideoFileClip(f"{home}/unbound_now/{__}").fps
+            p = multiprocessing.Process(target=process_images,args=(_,__,known_folder,frame_rate))
             p_list.append(p)
             p.start()
             if core_tracker % core_count == 0:
@@ -91,6 +91,7 @@ def eagle(known_folder,unknown_folder):
     end = time.time()
     print("done in " + str(end - start) + " seconds")
 
+os.system("clear")
 known_folder = input("known folder:\n")
 unknown_folder = input("unknown folder:\n")
-eagle(known_folder,unknown_folder)
+eagle_scout(known_folder,unknown_folder)
