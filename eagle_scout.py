@@ -29,7 +29,7 @@ def process_images(_,__,known_folder,frame_rate):
                     result = bool(face_recognition.compare_faces([known_file],unknown_file)[0])
                     if result:
                         with open(f"{home}/unbound_now_output/matches.txt","a") as file:
-                            file.write(f"{_} == {__} | time: " + str(datetime.timedelta(seconds=int(___ / frame_rate))) + "\n")
+                            file.write(f"{_} == {__[:-4]} | time: " + str(datetime.timedelta(seconds=int(___ / frame_rate))) + "\n")
 
                 except IndexError:
                     continue
