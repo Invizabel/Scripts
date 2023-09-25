@@ -89,7 +89,8 @@ def eagle_scout(known_folder,unknown_folder):
         __.join()
 
     end = time.time()
-    print("done in " + str(datetime.timedelta(seconds=int(___ / frame_rate))))
+    total_time = end - start
+    print("done in " + str(datetime.timedelta(seconds=int(total_time / frame_rate))))
 
 os.system("clear")
 known_folder = input("known folder:\n")
