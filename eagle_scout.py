@@ -28,8 +28,8 @@ def process_images(_,__,known_folder,frame_rate):
                     unknown_file = face_recognition.face_encodings(unknown_file)[0]
                     result = bool(face_recognition.compare_faces([known_file],unknown_file)[0])
                     if result:
-                        with open(f"{home}/unbound_now_output/matches.txt","a") as file:
-                            file.write(f"{_} == {__[:-4]} | time: " + str(datetime.timedelta(seconds=int(___ / frame_rate))) + "\n")
+                        with open(f"{home}/unbound_now_output/{_} = {__[:-4]}.txt","a") as file:
+                            file.write(str(datetime.timedelta(seconds=int(___ / frame_rate))) + "\n")
 
                 except IndexError:
                     continue
@@ -89,7 +89,7 @@ def eagle_scout(known_folder,unknown_folder):
         __.join()
 
     end = time.time()
-    print("done in " + str(end - start) + " seconds")
+    print("done in " + str(datetime.timedelta(seconds=int(___ / frame_rate))))
 
 os.system("clear")
 known_folder = input("known folder:\n")
