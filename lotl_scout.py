@@ -7,6 +7,7 @@ from moviepy.editor import VideoFileClip
 
 def lotl_scout(known_folder,unknown_folder):
     os.system("clear")
+    hits = []
 
     # prep work
     home = os.path.expanduser("~")
@@ -27,6 +28,7 @@ def lotl_scout(known_folder,unknown_folder):
         known_image = face_recognition.face_encodings(known_image,)[0]
         known_image_list.append(known_image)
     for _ in unknown_files:
+        print(f"checking {_}")
         frame_rate = VideoFileClip(unknown_folder + "/" + _).fps
         duration = int(VideoFileClip(unknown_folder + "/" + _).fps * VideoFileClip(unknown_folder + "/" + _).duration)
         capture = cv2.VideoCapture(unknown_folder + "/" + _)
@@ -36,25 +38,25 @@ def lotl_scout(known_folder,unknown_folder):
             flag,frame = capture.read()
             if flag:
                 frame_position = capture.get(cv2.CAP_PROP_POS_FRAMES)
-                rgb_frame = frame[:, :, ::-1]
-                frame_list.append(rgb_frame)
-                if len(frame_list) == 30:
-                    print("#",end="",flush=True)
-                    face_locations = face_recognition.batch_face_locations(frame_list,number_of_times_to_upsample=0)
-                    face_encodings = face_recognition.face_encodings(frame_list,face_locations)
-                    for face_encoding in face_encodings:
-                        result = bool(face_recognition.compare_faces(known_image_list,face_encoding)[0])
+                rgb_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+                face_locations = face_recognition.face_locations(rgb_frame)
+                face_encodings = face_recognition.face_encodings(rgb_frame,face_locations)
+                for face_encoding in face_encodings:
+                    for image in known_image_list:
+                        result = bool(face_recognition.compare_faces(image,face_encodings)[0])
                         if result:
-                            with open(f"{home}/lotl_scout_output/matches.txt","a") as file:
-                                file.write(str(datetime.timedelta(seconds=int(frame_position / frame_rate))) + "\n")
-
-                    frame_list = []
+                            hits.append(f"{_} | " + str(datetime.timedelta(seconds=int(frame_position / frame_rate))))
 
             else:
                 capture.set(cv2.CAP_PROP_POS_FRAMES,frame_position-1)
 
     end = time.time()
     total_time = end - start
+    hits = list(set(hits[:]))
+    with open(f"{home}/lotl_scout_output/matches.txt","a") as file:
+        for hit in hits:
+            file.write(hit + "\n")
+
     print("",end="\n")
     print("done in " + str(datetime.timedelta(seconds=int(total_time / frame_rate))))
 
