@@ -11,8 +11,8 @@ def lotl_scout(known_folder,unknown_folder):
     # prep work
     home = os.path.expanduser("~")
 
-    if not os.path.exists(f"{home}/eagle_scout_output"):
-        os.makedirs(f"{home}/eagle_scout_output")
+    if not os.path.exists(f"{home}/lotl_scout_output"):
+        os.makedirs(f"{home}/lotl_scout_output")
 
     known_files = os.listdir(known_folder)
     unknown_files = os.listdir(unknown_folder)
@@ -41,11 +41,11 @@ def lotl_scout(known_folder,unknown_folder):
                 if len(frame_list) == 30:
                     print("#",end="",flush=True)
                     face_locations = face_recognition.batch_face_locations(frame_list,number_of_times_to_upsample=0)
-                    face_encodings = face_recognition.face_encodings(frame_list,face_location)
+                    face_encodings = face_recognition.face_encodings(frame_list,face_locations)
                     for face_encoding in face_encodings:
                         result = bool(face_recognition.compare_faces(known_image_list,face_encoding)[0])
                         if result:
-                            with open(f"{home}/eagle_scout_output/matches.txt","a") as file:
+                            with open(f"{home}/lotl_scout_output/matches.txt","a") as file:
                                 file.write(str(datetime.timedelta(seconds=int(frame_position / frame_rate))) + "\n")
 
                     frame_list = []
