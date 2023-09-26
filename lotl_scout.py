@@ -1,13 +1,40 @@
 import datetime
+import multiprocessing
 import os
 import time
 import cv2
 import face_recognition
 from moviepy.editor import VideoFileClip
 
+def process_images(_,unknown_folder,known_image_list):
+    global hits
+    frame_rate = VideoFileClip(unknown_folder + "/" + _).fps
+    duration = int(VideoFileClip(unknown_folder + "/" + _).fps * VideoFileClip(unknown_folder + "/" + _).duration)
+    capture = cv2.VideoCapture(unknown_folder + "/" + _)
+    frame_position = capture.get(cv2.CAP_PROP_POS_FRAMES)
+    frame_list = []
+    while frame_position <= duration:
+        flag,frame = capture.read()
+        if flag:
+            frame_position = capture.get(cv2.CAP_PROP_POS_FRAMES)
+            rgb_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+            face_locations = face_recognition.face_locations(rgb_frame)
+            face_encodings = face_recognition.face_encodings(rgb_frame,face_locations)
+            for face_encoding in face_encodings:
+                for image in known_image_list:
+                    result = bool(face_recognition.compare_faces(image,face_encodings)[0])
+                    if result:
+                        hits.append(f"{_} | " + str(datetime.timedelta(seconds=int(frame_position / frame_rate))))
+
+        else:
+            capture.set(cv2.CAP_PROP_POS_FRAMES,frame_position-1)
+
 def lotl_scout(known_folder,unknown_folder):
+    global hits
+    hits = []
     os.system("clear")
     hits = []
+    core_count = multiprocessing.cpu_count()
 
     # prep work
     home = os.path.expanduser("~")
@@ -27,28 +54,20 @@ def lotl_scout(known_folder,unknown_folder):
         known_image = face_recognition.load_image_file(known_folder + "/" + _)
         known_image = face_recognition.face_encodings(known_image,)[0]
         known_image_list.append(known_image)
-    for _ in unknown_files:
-        print(f"checking {_}")
-        frame_rate = VideoFileClip(unknown_folder + "/" + _).fps
-        duration = int(VideoFileClip(unknown_folder + "/" + _).fps * VideoFileClip(unknown_folder + "/" + _).duration)
-        capture = cv2.VideoCapture(unknown_folder + "/" + _)
-        frame_position = capture.get(cv2.CAP_PROP_POS_FRAMES)
-        frame_list = []
-        while frame_position <= duration:
-            flag,frame = capture.read()
-            if flag:
-                frame_position = capture.get(cv2.CAP_PROP_POS_FRAMES)
-                rgb_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-                face_locations = face_recognition.face_locations(rgb_frame)
-                face_encodings = face_recognition.face_encodings(rgb_frame,face_locations)
-                for face_encoding in face_encodings:
-                    for image in known_image_list:
-                        result = bool(face_recognition.compare_faces(image,face_encodings)[0])
-                        if result:
-                            hits.append(f"{_} | " + str(datetime.timedelta(seconds=int(frame_position / frame_rate))))
 
-            else:
-                capture.set(cv2.CAP_PROP_POS_FRAMES,frame_position-1)
+    core_tracker = 0
+    p_list = []
+    for _ in unknown_files:
+        core_tracker += 1
+        p = multiprocessing.Process(target=process_images,args=(_,unknown_folder,known_image_list))
+        p_list.append(p)
+        p.start()
+        if core_tracker % core_count == 0:
+            for __ in p_list:
+                __.join()
+
+    for __ in p_list:
+        __.join()
 
     end = time.time()
     total_time = end - start
