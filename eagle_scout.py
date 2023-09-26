@@ -38,19 +38,16 @@ def eagle_scout(known_folder,unknown_folder):
                 frame_position = capture.get(cv2.CAP_PROP_POS_FRAMES)
                 rgb_frame = frame[:, :, ::-1]
                 frame_list.append(rgb_frame)
+                print(len(frame_list))
                 if len(frame_list) == 30:
-                    print("#",end="")
-                    try:
-                        face_locations = face_recognition.batch_face_locations(frame_list,number_of_times_to_upsample=0)
-                        face_encodings = face_recognition.face_encodings(frame_list,face_locations)
-                        for face_encoding in face_encodings:
-                            result = bool(face_recognition.compare_faces(known_image_list,face_encoding)[0])
-                            if result:
-                                with open(f"{home}/eagle_scout_output/matches.txt","a") as file:
-                                    file.write(str(datetime.timedelta(seconds=int(frame_position / frame_rate))) + "\n")
-
-                    except IndexError:
-                        pass
+                    print("#",end="",flush=True)
+                    face_locations = face_recognition.batch_face_locations(frame_list,number_of_times_to_upsample=0)
+                    face_encodings = face_recognition.face_encodings(frame_list,face_location)
+                    for face_encoding in face_encodings:
+                        result = bool(face_recognition.compare_faces(known_image_list,face_encoding)[0])
+                        if result:
+                            with open(f"{home}/eagle_scout_output/matches.txt","a") as file:
+                                file.write(str(datetime.timedelta(seconds=int(frame_position / frame_rate))) + "\n")
 
                     frame_list = []
 
