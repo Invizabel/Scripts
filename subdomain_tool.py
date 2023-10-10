@@ -22,7 +22,7 @@ new_links.sort()
 
 result = "["
 for _ in new_links:
-    result += f"{_},"
+    result += f"\"{_}\","
 
 result += "]"
 print(result)
