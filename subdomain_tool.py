@@ -13,13 +13,13 @@ for file in files:
         if not _.endswith(".") and re.search("^[a-z]",_.split(".")[0]):
             links.append(_.split(".")[0])
 
-init_links = Counter(links).most_common(1000)
+init_links = Counter(links).most_common(70)
 new_links = []
 for link in init_links:
     new_links.append(link[0])
 
 new_links.sort()
-result = "["
+result = "[\"\","
 for _ in new_links:
     result += f"\"{_}\","
 
