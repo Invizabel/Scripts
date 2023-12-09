@@ -13,7 +13,7 @@ for file in files:
         if not _.endswith(".") and re.search("^[a-z]",_.split(".")[0]):
             links.append(_.split(".")[0])
 
-init_links = Counter(links).most_common(85)
+init_links = Counter(links).most_common(1000)
 new_links = []
 for link in init_links:
     new_links.append(link[0])
