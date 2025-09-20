@@ -2,6 +2,8 @@ sudo apt update
 sudo apt upgrade
 sudo apt autoremove
 sudo apt autoclean
+sudo apt-get install unattended-upgrades
+sudo dpkg-reconfigure unattended-upgrades
 sudo docker pull ghcr.io/wg-easy/wg-easy:latest
 sudo docker run -d \
   --net wg \
