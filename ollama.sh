@@ -1,6 +1,8 @@
 sudo apt update
 sudo apt upgrade
 sudo apt install curl
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure unattended-upgrades
 sudo apt autoremove
 sudo apt autoclean
 curl -fsSL https://ollama.com/install.sh | sh
