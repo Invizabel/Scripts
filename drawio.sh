@@ -1,5 +1,7 @@
 sudo apt update
 sudo apt upgrade
+sudo apt-get install unattended-upgrades
+sudo dpkg-reconfigure unattended-upgrades
 sudo apt autoremove
 sudo apt autoclean
 sudo docker pull jgraph/drawio
