@@ -2,7 +2,7 @@ import os
 
 os.system("sudo apt update")
 os.system("sudo apt upgrade")
-os.system("sudo apt git npm nodejs nginx")
+os.system("sudo apt install git npm nodejs nginx")
 os.system("sudo apt install unattended-upgrades")
 os.system("sudo dpkg-reconfigure unattended-upgrades")
 os.system("sudo apt autoremove")
@@ -14,4 +14,5 @@ os.system("cd http.cat")
 os.system("npm run build")
 os.system("cd out")
 os.system("sudo cp -r * /var/www/html")
+
 os.system("sudo systemctl restart nginx")
