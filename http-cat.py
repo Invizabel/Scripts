@@ -14,5 +14,4 @@ os.system("cd http.cat")
 os.system("npm run build")
 os.system("cd out")
 os.system("sudo cp -r * /var/www/html")
-
 os.system("sudo systemctl restart nginx")
