@@ -1,12 +1,7 @@
 import os
 
 os.system("sudo apt update")
-os.system("sudo apt upgrade")
 os.system("sudo apt install git npm nodejs nginx")
-os.system("sudo apt install unattended-upgrades")
-os.system("sudo dpkg-reconfigure unattended-upgrades")
-os.system("sudo apt autoremove")
-os.system("sudo apt autoclean")
 os.system("sudo rm -r /var/www/html/*")
 os.system("git clone https://github.com/httpcats/http.cat")
 os.system("npm install next")
