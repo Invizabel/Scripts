@@ -1,6 +1,6 @@
 clear
 
-rm -rf ~/Downloads/flipper-application-catalog
+rm -rf ~/Downloads/flipper-application-catalogssss
 rm -rf ~/Downloads/qTemp
 rm -rf ~/Downloads/qApps/
 
@@ -35,5 +35,4 @@ done
 
 cd ~
 rm -rf ~/Downloads/qTemp
-
 rm -rf ~/Downloads/flipper-application-catalog
