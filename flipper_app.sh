@@ -24,7 +24,6 @@ find -follow | grep .yml | while IFS= read -r line; do
     unzip ~/Downloads/flipper-application-catalog/applications/temp/bundle_$count.zip
     cd ~/Downloads/flipper-application-catalog/applications/temp/code/
     python3 -m ufbt
-    cd ~/Downloads/flipper-application-catalog/temp/applications
     cp ~/Downloads/flipper-application-catalog/applications/temp/code/dist/*.fap ~/Downloads/qApps/
     rm -rf code
 done
