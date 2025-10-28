@@ -1,3 +1,7 @@
+rm -rf flipper_venv
+python3 -m venv flipper_venv
+source flipper_venv/bin/activate
+
 clear
 
 rm -rf ~/Downloads/flipper-application-catalog
@@ -9,6 +13,7 @@ touch ~/Downloads/qApps/errors.log
 
 cd ~/Downloads
 git clone https://github.com/flipperdevices/flipper-application-catalog
+pip install -r ~/Downloads/flipper-application-catalog/tools/requirements.txt
 cd ~/Downloads/flipper-application-catalog/applications
 
 let "count=0"
@@ -28,3 +33,4 @@ find -follow | grep .yml | while IFS= read -r line; do
     rm -rf code
 done
 rm -rf ~/Downloads/flipper-application-catalog
+rm -rf flipper_venv
