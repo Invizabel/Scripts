@@ -1,4 +1,16 @@
 import os
+import socket
+
+s = socket.socket()
+s.connect(("1.1.1.1", 80))
+localhost = s.getsockname()[0]
+s.close()
+
+with open("index.html","r") as file:
+    data = file.read()
+
+with open("index.html","w") as file:
+    file.write(data.replace("localhost",localhost))
 
 os.system("sudo apt update")
 os.system("sudo apt install p7zip-full curl wget nginx git -y")
