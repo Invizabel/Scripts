@@ -13,17 +13,17 @@ os.system("sudo mkdir /var/www/html/swotgb")
 os.system("sudo cp -r retroarch/* /var/www/html/retroarch")
 os.system("sudo cp -r javatari.js/release/stable/5.0/standalone/* /var/www/html/javatari")
 os.system("sudo cp -r swotGB/gbjs.htm /var/www/html/swotgb/index.html")
-os.system("wget https://raw.githubusercontent.com/Invizabel/Web-EMU/refs/heads/main/index.html")
+os.system("wget https://raw.githubusercontent.com/Invizabel/Scripts/refs/heads/main/All%20The%20Things/index.html")
 os.system("sudo cp index.html /var/www/html/index.html")
 
 # docker pull
 
 # port 80
-os.system("sudo docker run -d --name=drawio --restart always -p 80:8080 jgraph/drawio")
+os.system("sudo docker run -d --name=drawio --restart always -p 81:8080 jgraph/drawio")
 # port 81
-os.system("sudo docker run -d --name=forgejo --restart always -p 81:3000 codeberg.org/forgejo/forgejo:13")
+os.system("sudo docker run -d --name=forgejo --restart always -p 82:3000 codeberg.org/forgejo/forgejo:13")
 # port 82
-os.system("sudo docker run -d --name=mealie --restart always -p 82:9000 ghcr.io/mealie-recipes/mealie:latest")
+os.system("sudo docker run -d --name=mealie --restart always -p 83:9000 ghcr.io/mealie-recipes/mealie:latest")
 
 # docker compose
 
