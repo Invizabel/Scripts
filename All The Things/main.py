@@ -32,5 +32,4 @@ os.system("mkdir ./immich-app")
 # port 3000
 os.system("wget -O ./immich-app/docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml")
 os.system("wget -O ./immich-app/.env https://github.com/immich-app/immich/releases/latest/download/example.env")
-
-os.system("sudo docker compose up -d")
+os.system("sudo docker compose -f ./immich-app/docker-compose.yml up -d")
