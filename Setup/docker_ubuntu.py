@@ -10,4 +10,3 @@ os.system("sudo apt-get install docker-ce docker-ce-cli containerd.io docker-bui
 os.system("sudo systemctl start docker")
 os.system("sudo systemctl enable docker")
 os.system("sudo docker run hello-world")
-
