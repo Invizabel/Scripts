@@ -7,6 +7,7 @@ clear
 rm -rf ~/Downloads/flipper-application-catalog
 rm -rf ~/Downloads/qApps/
 
+mkdir ~/Downloads/qApps
 mkdir ~/Downloads/qApps/Bluetooth
 
 touch ~/Downloads/qApps/errors.log
@@ -28,7 +29,7 @@ find -follow | grep .yml | while IFS= read -r line; do
     cd temp
     unzip ~/Downloads/flipper-application-catalog/applications/Bluetooth/temp/bundle_$count.zip
     cd ~/Downloads/flipper-application-catalog/applications/Bluetooth/temp/code/
-    python3 -m ufbt
+    python3 -m ufbtls
     cp ~/Downloads/flipper-application-catalog/applications/Bluetooth/temp/code/dist/*.fap ~/Downloads/qApps/Bluetooth
     rm -rf code
 done
