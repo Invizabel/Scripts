@@ -7,7 +7,7 @@ clear
 rm -rf ~/Downloads/flipper-application-catalog
 rm -rf ~/Downloads/qApps/
 
-mkdir ~/Downloads/qApps/
+mkdir ~/Downloads/qApps/Bluetooth
 
 touch ~/Downloads/qApps/errors.log
 
