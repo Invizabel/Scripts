@@ -18,7 +18,7 @@ cd ~/Downloads/flipper-application-catalog/applications/Bluetooth
 
 let "count=0"
 find -follow | grep .yml | while IFS= read -r line; do
-    cd ~/Downloads/flipper-application-catalog/applications
+    cd ~/Downloads/flipper-application-catalog/applications/Bluetooth
     rm -rf temp
     mkdir temp
     echo $line
