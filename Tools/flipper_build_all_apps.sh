@@ -9,6 +9,16 @@ rm -rf ~/Downloads/qApps/
 
 mkdir ~/Downloads/qApps
 mkdir ~/Downloads/qApps/Bluetooth
+mkdir ~/Downloads/qApps/GPIO
+mkdir ~/Downloads/qApps/Games
+mkdir ~/Downloads/qApps/Infrared
+mkdir ~/Downloads/qApps/Media
+mkdir ~/Downloads/qApps/NFC
+mkdir ~/Downloads/qApps/RFID
+mkdir ~/Downloads/qApps/Sub-GHz
+mkdir ~/Downloads/qApps/Tools
+mkdir ~/Downloads/qApps/USB
+mkdir ~/Downloads/qApps/iButton
 
 touch ~/Downloads/qApps/errors.log
 
@@ -29,7 +39,7 @@ find -follow | grep .yml | while IFS= read -r line; do
     cd temp
     unzip ~/Downloads/flipper-application-catalog/applications/Bluetooth/temp/bundle_$count.zip
     cd ~/Downloads/flipper-application-catalog/applications/Bluetooth/temp/code/
-    python3 -m ufbtls
+    python3 -m ufbt
     cp ~/Downloads/flipper-application-catalog/applications/Bluetooth/temp/code/dist/*.fap ~/Downloads/qApps/Bluetooth
     rm -rf code
 done
