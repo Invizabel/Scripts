@@ -14,7 +14,7 @@ touch ~/Downloads/qApps/errors.log
 cd ~/Downloads
 git clone https://github.com/flipperdevices/flipper-application-catalog
 pip install -r ~/Downloads/flipper-application-catalog/tools/requirements.txt
-cd ~/Downloads/flipper-application-catalog/applications
+cd ~/Downloads/flipper-application-catalog/applications/Bluetooth
 
 let "count=0"
 find -follow | grep .yml | while IFS= read -r line; do
@@ -29,7 +29,7 @@ find -follow | grep .yml | while IFS= read -r line; do
     unzip ~/Downloads/flipper-application-catalog/applications/temp/bundle_$count.zip
     cd ~/Downloads/flipper-application-catalog/applications/temp/code/
     python3 -m ufbt
-    cp ~/Downloads/flipper-application-catalog/applications/temp/code/dist/*.fap ~/Downloads/qApps/
+    cp ~/Downloads/flipper-application-catalog/applications/temp/code/dist/*.fap ~/Downloads/qApps/Bluetooth
     rm -rf code
 done
 rm -rf ~/Downloads/flipper-application-catalog
