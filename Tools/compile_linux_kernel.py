@@ -14,6 +14,7 @@ os.system("sudo apt update")
 os.system("sudo apt install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison")
 # needed on ubuntu and maybe others? https://groups.google.com/g/syzkaller-bugs/c/lBS-kjONLSw/m/j6jOom9SEAAJ?pli=1
 os.system("sudo apt install libdw-dev")
+os.system("sudo apt install gawk")
 os.system(f"wget https://cdn.kernel.org/pub/linux/kernel/v6.x/{kernel_version}.tar.xz")
 os.system(f"tar -xvf {kernel_version}.tar.xz")
 os.chdir(kernel_version)
