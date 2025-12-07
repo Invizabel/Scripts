@@ -1,4 +1,5 @@
 import os
+import time
 
 os.system("clear")
 
@@ -22,9 +23,16 @@ os.system("make clean")
 os.system("make olddefconfig")
 os.system("./scripts/config --disable SYSTEM_TRUSTED_KEYS")
 os.system("./scripts/config --disable SYSTEM_REVOCATION_KEYS")
+
+start = time.time()
+
 os.system("make -j$(nproc) 2>&1 | tee log")
+
 if os.path.exists("arch/x86/boot/bzImage") and os.path.getsize("arch/x86/boot/bzImage") > 0:
     print("compiled succesfully")
 
 else:
     print("compile failed")
+
+end = time.time()
+print("time taken:", str(round(end - start)), "seconds")
