@@ -25,3 +25,6 @@ os.system("./scripts/config --disable SYSTEM_REVOCATION_KEYS")
 os.system("make -j$(nproc) 2>&1 | tee log")
 if os.path.exists("arch/x86/boot/bzImage") and os.path.getsize("arch/x86/boot/bzImage") > 0:
     print("compiled succesfully")
+
+else:
+    print("compile failed")
