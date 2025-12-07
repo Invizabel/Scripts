@@ -1,7 +1,7 @@
 import os
 
 if os.path.exists("KERNEL"):
-    os.remove("KERNEL")
+    os.system("rm -rf KERNEL")
 os.mkdir("KERNEL")
 
 fetch_files = "linux-6.18.tar.xz"
