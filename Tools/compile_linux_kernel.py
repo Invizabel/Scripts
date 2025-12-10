@@ -1,5 +1,8 @@
 import os
+import platform
 import time
+
+arch = platform.machine()
 
 os.system("clear")
 
@@ -28,8 +31,17 @@ start = time.time()
 
 os.system("make -j$(nproc) 2>&1 | tee log")
 
-if os.path.exists("arch/x86/boot/bzImage") and os.path.getsize("arch/x86/boot/bzImage") > 0:
+if arch in ["armv6l", "armv7l"] and os.path.exists("arch/arm/boot/bzImage") and os.path.getsize("arch/x86/boot/bzImage") > 0:
     print("compiled succesfully")
+
+elif arch in ["aarch64"] and os.path.exists("arch/arm64/boot/bzImage") and os.path.getsize("arch/x86/boot/bzImage") > 0:
+    print("compiled succesfully")
+
+elif arch in ["x86_64", "i686"] and os.path.exists("arch/x86/boot/bzImage") and os.path.getsize("arch/x86/boot/bzImage") > 0:
+    print("compiled succesfully")
+
+elif:
+    print("compilation status unknown")
 
 else:
     print("compile failed")
