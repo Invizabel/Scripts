@@ -40,11 +40,8 @@ elif arch in ["aarch64"] and os.path.exists("arch/arm64/boot/bzImage") and os.pa
 elif arch in ["x86_64", "i686"] and os.path.exists("arch/x86/boot/bzImage") and os.path.getsize("arch/x86/boot/bzImage") > 0:
     print("compiled succesfully")
 
-elif:
-    print("compilation status unknown")
-
 else:
-    print("compile failed")
+    print("compile failed or unknown architecture")
 
 end = time.time()
 print("time taken:", str(round(end - start)), "seconds")
