@@ -1,3 +1,5 @@
+# For use with Upscayl or other batching ai upscale program
+
 import cv2
 import os
 
