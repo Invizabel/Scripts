@@ -14,7 +14,7 @@ def video_to_image(filename):
         if not ret:
             break
 
-        frame_filename = f"IN/{os.path.splitext(filename)[0]}_frame_{frame_idx:010d}.jpg"
+        frame_filename = f"IN/{os.path.splitext(filename)[0]}_frame_{frame_idx:010d}.png"
         cv2.imwrite(frame_filename, frame)
         frame_idx += 1
 
