@@ -24,7 +24,7 @@ def video_to_image(filename):
     print(f"Extracted {frame_idx} frames from {filename}")
 
 def image_to_video(filename,framerate):
-    os.system(f"ffmpeg -framerate {framerate} -i OUT/{filename}_frame_%010d.png old_output.mkv && ffmpeg -i output.mkv -i output.wav output.mkv && rm old_output.mkv")
+    os.system(f"ffmpeg -framerate {framerate} -i OUT/{filename}_frame_%010d.png old_output.mkv && ffmpeg -i old_output.mkv -i output.wav output.mkv && rm old_output.mkv")
     
 mode = input("1 = Video2Frames | 2 = Frames2Video\n")
 if mode == "1":
