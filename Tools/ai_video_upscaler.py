@@ -1,9 +1,9 @@
 import cv2
 import os
 
-def video_to_image(filename):
+def video2image(filename):
     print(f"converting: {filename} to audio")
-    os.system(f"ffmpeg -i {filename} output.wav")
+    os.system(f"ffmpeg -i {filename} output.flac")
     print(f"converting: {filename} to images")
     cap = cv2.VideoCapture(filename)
     frame_idx = 0
@@ -16,22 +16,22 @@ def video_to_image(filename):
         if not ret:
             break
 
-        frame_filename = f"IN/{os.path.splitext(filename)[0]}_frame_{frame_idx:010d}.png"
+        frame_filename = f"IN/{os.path.splitext(filename)[0]}_frame_{frame_idx:010d}.jpg"
         cv2.imwrite(frame_filename, frame)
         frame_idx += 1
 
     cap.release()
     print(f"Extracted {frame_idx} frames from {filename}")
 
-def image_to_video(filename,framerate):
-    os.system(f"ffmpeg -framerate {framerate} -i OUT/{filename}_frame_%010d.png old_output.mkv && ffmpeg -i old_output.mkv -i output.wav output.mkv && rm old_output.mkv")
+def image2video(filename,framerate):
+    os.system(f"ffmpeg -framerate {framerate} -i OUT/{filename}_frame_%010d.jpg old_output.mkv && ffmpeg -i old_output.mkv -i output.flac output.mkv && rm old_output.mkv")
     
 mode = input("1 = Video2Frames | 2 = Frames2Video\n")
 if mode == "1":
     filename = input("filename: ")
-    video_to_image(filename)
+    video2image(filename)
 
 if mode == "2":
     filename = input("filename: ")
     framerate = input("frame rate: ")
-    image_to_video(filename,framerate)
+    image2video(filename,framerate)
