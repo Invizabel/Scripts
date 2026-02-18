@@ -1,4 +1,4 @@
-# or follow the docs: https://libretime.org/docs/admin-manual/install/install-using-docker/
+# Or follow the docs: https://libretime.org/docs/admin-manual/install/install-using-docker/
 
 import os
 
@@ -20,7 +20,7 @@ ICECAST_RELAY_PASSWORD=$(openssl rand -hex 16)' >> .env""")
 
 os.system('bash -a -c "source .env; envsubst < config.template.yml > config.yml"')
 os.system("sudo apt update && sudo apt install gettext-base")
-os.system("docker compose run --rm api libretime-api migrate")
-os.system("docker compose up -d")
-os.system("docker compose ps")
-os.system("docker compose logs -f")
+os.system("sudo docker compose run --rm api libretime-api migrate")
+os.system("sudo docker compose up -d")
+os.system("sudo docker compose ps")
+os.system("sudo docker compose logs -f")
