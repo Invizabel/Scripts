@@ -3,7 +3,7 @@
 import os
 
 os.system('echo LIBRETIME_VERSION="4.5.0" > .env')
-os.system(". .env")
+os.system("bash -c 'source .env'")
 os.system("wget 'https://raw.githubusercontent.com/libretime/libretime/4.5.0/docker-compose.yml'")
 os.system("wget 'https://raw.githubusercontent.com/libretime/libretime/4.5.0/docker/config.template.yml'")
 
