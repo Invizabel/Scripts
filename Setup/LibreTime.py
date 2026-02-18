@@ -4,8 +4,8 @@ import os
 
 os.system('echo LIBRETIME_VERSION="4.5.0" > .env')
 os.system(". .env")
-os.system("wget 'https://raw.githubusercontent.com/libretime/libretime/$LIBRETIME_VERSION/docker-compose.yml'")
-os.system("wget 'https://raw.githubusercontent.com/libretime/libretime/$LIBRETIME_VERSION/docker/config.template.yml'")
+os.system("wget 'https://raw.githubusercontent.com/libretime/libretime/4.5.0/docker-compose.yml'")
+os.system("wget 'https://raw.githubusercontent.com/libretime/libretime/4.5.0/docker/config.template.yml'")
 
 os.system("""echo '# Postgres
 POSTGRES_PASSWORD=$(openssl rand -hex 16)
