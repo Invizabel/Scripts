@@ -52,6 +52,7 @@ for i in content["versions"]:
                     with open(f"Server/{version}/eula.txt", "w") as file:
                         file.write("eula=true")
 
+                    os.chdir(f"Server/{version}")
                     print("Running server.")
                     os.system("java -jar server.jar --nogui")
 
