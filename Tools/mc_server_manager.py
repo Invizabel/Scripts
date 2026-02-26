@@ -41,7 +41,7 @@ for i in content["versions"]:
                     print("Creating folder for the server to live in.")
                     if not os.path.exists("Server"):
                         os.mkdir("Server")
-                    os.chdir("Server")
+                    os.chdir(f"{home_directory}/Server")
                     if not os.path.exists(version):
                         os.mkdir(version)
                     os.chdir(home_directory)
@@ -49,10 +49,10 @@ for i in content["versions"]:
                     shutil.copy(f"{version}.jar", f"Server/{version}/{version}.jar")
                     
                     print("Accepting EULA.")
-                    with open(f"Server/{version}/eula.txt", "w") as file:
+                    with open(f"{home_directory}/Server/{version}/eula.txt", "w") as file:
                         file.write("eula=true")
 
-                    os.chdir(f"Server/{version}")
+                    os.chdir(f"{home_directory}/Server/{version}")
                     print("Running server.")
                     os.system("java -jar server.jar --nogui")
 
