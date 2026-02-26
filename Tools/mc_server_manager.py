@@ -23,7 +23,7 @@ for i in content["versions"]:
             print(f"Found version {version} {i['type']} @ {content['downloads']['server']['url']}.")
             print(f"Downloading: {version}.")
             content = requests.get(content['downloads']['server']['url'], headers={"User-Agent": "Mozilla/5.0 (Minecraft Server Manager)"}, timeout=10).content
-            with open(f"{version}.jar","wb") as file:
+            with open(f"~/{version}.jar","wb") as file:
                 file.write(content)
             if os.path.exists(f"{version}.jar") and os.path.getsize(f"{version}.jar") > 1024:
                 print("Download successful.")
@@ -32,7 +32,6 @@ for i in content["versions"]:
                 devnull.close()
                 if retval == 0:
                     print("Package default-jre is installed.")
-                    shutil.copy(f"{version}.jar", f"~/{version}.jar")
                     os.chdir("~")
                     print("Creating folder for the server to live in.")
                     if not os.path.exists("Server"):
@@ -40,8 +39,8 @@ for i in content["versions"]:
                     os.chdir("Server")
                     if not os.path.exists(version):
                         os.mkdir(version)
-                        
-                    shutil.copy(f"~/{version}.jar", f"{version}.jar")
+                    os.chdir("~")
+                    shutil.copy(f"{version}.jar", f"{version}.jar")
                     print("Accepting EULA.")
                     print("Running server.")
                     os.system("java -jar server.jar --nogui")
