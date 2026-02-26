@@ -49,7 +49,7 @@ for i in content["versions"]:
                     shutil.copy(f"{version}.jar", f"Server/{version}/{version}.jar")
                     
                     print("Accepting EULA.")
-                    with open("eula.txt", "w") as file:
+                    with open(f"Server/{version}/eula.txt", "w") as file:
                         file.write("eula=true")
 
                     print("Running server.")
