@@ -1,13 +1,13 @@
 import os
 import requests
+import shutil
 import subprocess
 
 users_os = "unix"
 if os.name == "nt":
     users_os = "windows"
 
-choice = input("1: Download new server\n2: Upgrade server\nChoose: ")
-version = input("version:\n")
+version = input("version: ")
 found_version = False
 content = requests.get("https://launchermeta.mojang.com/mc/game/version_manifest.json", headers={"User-Agent": "Mozilla/5.0 (Minecraft Server Manager)"}, timeout=10).json()
 for i in content["versions"]:
@@ -15,27 +15,41 @@ for i in content["versions"]:
         found_version = True
         content = requests.get(i["url"], headers={"User-Agent": "Mozilla/5.0 (Minecraft Server Manager)"}, timeout=10).json()
         if users_os == "windows":
-            print(f"Found version {version} {i['type']} @ {content['downloads']['windows_server']['url']}")
+            print(f"Found version {version} {i['type']} @ {content['downloads']['windows_server']['url']}.")
             content = requests.get(content['downloads']['windows_server']['url'], headers={"User-Agent": "Mozilla/5.0 (Minecraft Server Manager)"}, timeout=10).content
             with open(f"{version}.jar","wb") as file:
                 file.write(content)
         else: 
-            print(f"Found version {version} {i['type']} @ {content['downloads']['server']['url']}")
-            print(f"Downloading: {version}")
+            print(f"Found version {version} {i['type']} @ {content['downloads']['server']['url']}.")
+            print(f"Downloading: {version}.")
             content = requests.get(content['downloads']['server']['url'], headers={"User-Agent": "Mozilla/5.0 (Minecraft Server Manager)"}, timeout=10).content
             with open(f"{version}.jar","wb") as file:
                 file.write(content)
             if os.path.exists(f"{version}.jar") and os.path.getsize(f"{version}.jar") > 1024:
-                print("Download successful")
+                print("Download successful.")
                 devnull = open(os.devnull,"w")
                 retval = subprocess.call(["dpkg","-s","default-jre"],stdout=devnull,stderr=subprocess.STDOUT)
                 devnull.close()
                 if retval == 0:
                     print("Package default-jre is installed.")
+                    shutil.copy(f"{version}.jar", f"~/{version}.jar")
+                    os.chdir("~")
+                    print("Creating folder for the server to live in.")
+                    if not os.path.exists("Server"):
+                        os.mkdir("Server")
+                    os.chdir("Server")
+                    if not os.path.exists(version):
+                        os.mkdir(version)
+                        
+                    shutil.copy(f"~/{version}.jar", f"{version}.jar")
+                    print("Accepting EULA.")
+                    print("Running server.")
+                    os.system("java -jar server.jar --nogui")
+
                 else:
                     print("Package default-jre not installed. Please install it.")
             else:
-                print("Download failed")
+                print("Download failed.")
             
 
 if not found_version:
