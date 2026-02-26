@@ -1,5 +1,6 @@
 import os
 import requests
+import subprocess
 
 users_os = "unix"
 if os.name == "nt":
@@ -26,6 +27,13 @@ for i in content["versions"]:
                 file.write(content)
             if os.path.exists(f"{version}.jar") and os.path.getsize(f"{version}.jar") > 1024:
                 print("Download successful")
+                devnull = open(os.devnull,"w")
+                retval = subprocess.call(["dpkg","-s","default-jre"],stdout=devnull,stderr=subprocess.STDOUT)
+                devnull.close()
+                if retval == 0:
+                    print("Package default-jre is installed.")
+                else:
+                    print("Package default-jre not installed. Please install it.")
             else:
                 print("Download failed")
             
