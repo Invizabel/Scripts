@@ -20,28 +20,38 @@ for i in content["versions"]:
             with open(f"{version}.jar","wb") as file:
                 file.write(content)
         else: 
+            home_directory = "/".join(os.getcwd().split("/")[:3])
+            
             print(f"Found version {version} {i['type']} @ {content['downloads']['server']['url']}.")
             print(f"Downloading: {version}.")
+            
             content = requests.get(content['downloads']['server']['url'], headers={"User-Agent": "Mozilla/5.0 (Minecraft Server Manager)"}, timeout=10).content
-            with open(f"~/{version}.jar","wb") as file:
+            with open(f"{home_directory}/{version}.jar","wb") as file:
                 file.write(content)
-            if os.path.exists(f"{version}.jar") and os.path.getsize(f"{version}.jar") > 1024:
+            
+            if os.path.exists(f"{home_directory}/{version}.jar") and os.path.getsize(f"{home_directory}/{version}.jar") > 1024:
                 print("Download successful.")
                 devnull = open(os.devnull,"w")
                 retval = subprocess.call(["dpkg","-s","default-jre"],stdout=devnull,stderr=subprocess.STDOUT)
                 devnull.close()
                 if retval == 0:
                     print("Package default-jre is installed.")
-                    os.chdir("~")
+                    
+                    os.chdir(home_directory)
                     print("Creating folder for the server to live in.")
                     if not os.path.exists("Server"):
                         os.mkdir("Server")
                     os.chdir("Server")
                     if not os.path.exists(version):
                         os.mkdir(version)
-                    os.chdir("~")
-                    shutil.copy(f"{version}.jar", f"{version}.jar")
+                    os.chdir(home_directory)
+                    
+                    shutil.copy(f"{version}.jar", f"Server/{version}/{version}.jar")
+                    
                     print("Accepting EULA.")
+                    with open("eula.txt", "w") as file:
+                        file.write("eula=true")
+
                     print("Running server.")
                     os.system("java -jar server.jar --nogui")
 
