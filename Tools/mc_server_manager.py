@@ -54,6 +54,7 @@ for i in content["versions"]:
 
                     os.chdir(f"{home_directory}/Server/{version}")
                     print("Running server.")
+                    os.system(f"java -jar {version}.jar --nogui")
                     os.system("java -jar server.jar --nogui")
 
                 else:
