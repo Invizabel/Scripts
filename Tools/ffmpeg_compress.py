@@ -11,8 +11,8 @@ if not os.path.exists("OUT"):
 for file in files:
     if file.endswith(".mkv"):
         print(f"Converting {file}")
-        os.system(f"ffmpeg -i '{file}' 'OUT/{file.replace('.mkv','.mp4')}'")
+        os.system(f"ffmpeg -hwaccel {hwaccel} -i '{file}' 'OUT/{file.replace('.mkv','.mp4')}'")
 
     if file.endswith(".wav"):
         print(f"Converting {file}")
-        os.system(f"ffmpeg -i '{file}' -hwaccel {hwaccel} 'OUT/{file.replace('.wav','.flac')}'")
+        os.system(f"ffmpeg -hwaccel {hwaccel} -i '{file}' 'OUT/{file.replace('.wav','.flac')}'")
