@@ -13,4 +13,4 @@ for file in files:
 
     if file.endswith(".wav"):
         print(f"Converting {file}")
-        os.system(f"ffmpeg -i '{file}' 'OUT/{file.replace('.wav','.flac')}'")
+        os.system(f"ffmpeg -i '{file}' -c:a flac 'OUT/{file.replace('.wav','.flac')}'")
