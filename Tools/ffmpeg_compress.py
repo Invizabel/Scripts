@@ -23,7 +23,7 @@ for file in files:
                     break
 
         if best_audio == -1:
-             os.system(f"ffmpeg -i '{file}' -c:a flac -c:s copy -c:v copy 'OUT/{file}'")
+             os.system(f"ffmpeg -i '{file}' 'OUT/{file.replace('.mkv', '.mp4')}'")
              
         else:
-            os.system(f"ffmpeg -i '{file}' -map 0:v:0 -map 0:a:{best_audio} -c:a flac -c:s copy -c:v copy 'OUT/{file}'")
+            os.system(f"ffmpeg -i '{file}' -map 0:v:0 -map 0:a:{best_audio} 'OUT/{file.replace('.mkv', '.mp4')}'")
