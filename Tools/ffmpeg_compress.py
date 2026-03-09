@@ -9,4 +9,4 @@ if not os.path.exists("OUT"):
 for file in files:
     if file.endswith(".mkv"):
         print(f"Converting {file}")
-        os.system(f"ffmpeg -i '{file}' -c:v copy -c:s copy  -c:a flac 'OUT/{file}'")
+        os.system(f"ffmpeg -i '{file}' 'OUT/{file.replace('.mkv', '.mp4')}'")
