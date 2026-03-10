@@ -1,4 +1,4 @@
-# To run: git clone https://github.com/Invizabel/Scripts && cd Scripts/Setup && sudo -i && python3 install_mastodon.py
+# To run: git clone https://github.com/Invizabel/Scripts && cd Scripts/Setup && sudo python3 install_mastodon.py
 
 import os
 
