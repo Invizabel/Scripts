@@ -1,8 +1,9 @@
+# To run: git clone https://github.com/Invizabel/Scripts && cd Scripts/Setup && sudo -i && python3 install_mastodon.py
+
 import os
 
 # official Mastodon docs recommends using either Ubuntu LTS or Debian (https://docs.joinmastodon.org/admin/prerequisites/)
 domain_name = input("domain name: ")
-os.system("sudo -i")
 os.system("apt update && apt upgrade -y")
 os.system("apt install fail2ban ufw curl wget gnupg lsb-release ca-certificates -y")
 os.system("ufw allow ssh && ufw allow http && ufw allow https && ufw enable")
