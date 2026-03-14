@@ -1,4 +1,4 @@
-# increase volume to 500% (-filter:a 'volume=5')
+# increase volume to 1000% (-filter:a 'volume=10')
 
 import os
 
@@ -18,8 +18,8 @@ with open("directory_listing.txt", "r") as file:
             file = f"{folder}/{line}".strip()
             if file.endswith(".mp3"):
                 print(f"Converting {file}")
-                os.system(f"ffmpeg -i '{file}' -filter:a 'volume=5' 'OUT/{file}'")
+                os.system(f"ffmpeg -i '{file}' -filter:a 'volume=10' 'OUT/{file}'")
 
             if file.endswith(".mp4"):
                 print(f"Converting {file}")
-                os.system(f"ffmpeg -i '{file}' -filter:a 'volume=5' 'OUT/{file}'")
+                os.system(f"ffmpeg -i '{file}' -filter:a 'volume=10' 'OUT/{file}'")
