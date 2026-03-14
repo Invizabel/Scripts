@@ -16,10 +16,5 @@ with open("directory_listing.txt", "r") as file:
                 os.mkdir(f"OUT/{folder}")
         else:
             file = f"{folder}/{line}".strip()
-            if file.endswith(".mp3"):
-                print(f"Converting {file}")
-                os.system(f"ffmpeg -i '{file}' -filter:a 'volume=10' 'OUT/{file}'")
-
-            if file.endswith(".mp4"):
-                print(f"Converting {file}")
-                os.system(f"ffmpeg -i '{file}' -filter:a 'volume=10' 'OUT/{file}'")
+            print(f"Converting {file}")
+            os.system(f"ffmpeg -i '{file}' -filter:a 'volume=10' 'OUT/{file}'")
