@@ -17,4 +17,4 @@ with open("directory_listing.txt", "r") as file:
         else:
             file = f"{folder}/{line}".strip()
             print(f"Converting {file}")
-            os.system(f"ffmpeg -i '{file}' -filter:a 'volume=10' 'OUT/{file}'")
+            os.system(f"ffmpeg -i '{file}' -ac 2 -filter:a 'volume=10' 'OUT/{file}'")
