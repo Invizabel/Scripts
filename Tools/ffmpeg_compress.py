@@ -20,7 +20,7 @@ with open("directory_listing.txt", "r") as file:
                 # force rename removing quotes
                 os.rename(file,file.replace("'","").replace('"',''))
                 print(f"Converting {file.replace('\'','').replace('\"','')}")
-                os.system(f"ffmpeg -i '{file.replace('\'','').replace('\"','')}' 'OUT/{file.replace('\'','').replace('\"','').replace('.flac', '.mp3')}'")
+                os.system(f"ffmpeg -i '{file.replace('\'','').replace('\"','')}' -codec:a libmp3lame -b:a 128k 'OUT/{file.replace('\'','').replace('\"','').replace('.flac', '.mp3')}'")
 
             if file.endswith(".mkv"):
                 # force rename removing quotes
