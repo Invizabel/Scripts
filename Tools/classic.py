@@ -1,6 +1,8 @@
 import os
 import urllib.request
 
+os.system("sudo apt update && sudo apt install nginx -y")
+
 if not os.path.exists("assets"):
     os.mkdir("assets")
 if not os.path.exists("assets/css"):
@@ -63,3 +65,6 @@ for i in textures_previews:
     response = urllib.request.urlopen(f"https://classic.minecraft.net/assets/textures/previews/{i}.png").read()
     with open(f"assets/textures/previews/{i}.png","wb") as file:
         file.write(response)
+
+os.system("sudo cp -r assets/ /var/www/html/")
+os.system("sudo cp -r * /var/www/html/classic/")
