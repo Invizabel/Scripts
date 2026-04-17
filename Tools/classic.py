@@ -66,5 +66,4 @@ for i in textures_previews:
     with open(f"assets/textures/previews/{i}.png","wb") as file:
         file.write(response)
 
-os.system("sudo cp -r assets/ /var/www/html/")
-os.system("sudo cp -r * /var/www/html/classic/")
+os.system("sudo cp -r * /var/www/html/")
