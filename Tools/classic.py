@@ -3,6 +3,9 @@ import urllib.request
 
 os.system("sudo apt update && sudo apt install nginx -y")
 
+os.mkdir("classic")
+os.chdir("classic")
+
 if not os.path.exists("assets"):
     os.mkdir("assets")
 if not os.path.exists("assets/css"):
