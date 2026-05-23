@@ -1,3 +1,5 @@
+sudo apt install gcc zlib1g-dev libpng-dev libjpeg-dev -y
+
 rm -rf flipper_venv
 python3 -m venv flipper_venv
 source flipper_venv/bin/activate
