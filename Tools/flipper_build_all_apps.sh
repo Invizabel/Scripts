@@ -1,5 +1,5 @@
 sudo apt update
-sudo apt install python3-dev python3-venv gcc zlib1g-dev libpng-dev libjpeg-dev -y
+sudo apt install python3-dev python3-venv gcc zlib1g-dev libpng-dev libjpeg-dev unzip zip -y
 
 rm -rf flipper_venv
 python3 -m venv flipper_venv
