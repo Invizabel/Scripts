@@ -19,11 +19,12 @@ with open("directory_listing.txt", "r") as file:
             if file.endswith(".flac") or file.endswith(".wav"):
                 # force rename removing quotes
                 os.rename(file,file.replace("'","").replace('"',''))
-                print(f"Converting {file.replace('\'','').replace('\"','')}")
-                os.system(f"ffmpeg -i '{file.replace('\'','').replace('\"','')}' 'OUT/{file.replace('\'','').replace('\"','').replace('.flac', '.mp3').replace('.wav', '.mp3')}'")
+                print("Converting " + file.replace('\'','').replace('\"',''))
+                os.system("ffmpeg -i \'" + file.replace('\'','').replace('\"','') + "\' \'" + "OUT/" + file.replace('\'','').replace('\"','').replace('.flac', '.mp3').replace('.wav', '.mp3') + "\'")
 
             if file.endswith(".mkv"):
                 # force rename removing quotes
                 os.rename(file,file.replace("'","").replace('"',''))
-                print(f"Converting {file.replace('\'','').replace('\"','')}")
-                os.system(f"ffmpeg -i '{file.replace('\'','').replace('\"','')}' 'OUT/{file.replace('\'','').replace('\"','').replace('.mkv', '.mp4')}'")
+                print("Converting " + file.replace('\'','').replace('\"',''))
+                os.system("ffmpeg -i \'" + file.replace('\'','').replace('\"','') + "\' \'" + "OUT/" + file.replace('\'','').replace('\"','').replace('.mkv', '.mp4') + "\'")
+                
